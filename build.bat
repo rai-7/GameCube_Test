@@ -1,2 +1,2 @@
-MAKE
-PAUSE
+make
+pause

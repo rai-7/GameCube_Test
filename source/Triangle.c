@@ -1,10 +1,9 @@
 //WARNING very ugly code. you will die if you look
 
 #include <stdlib.h>
-#include <string.h>
-#include <malloc.h>
-#include <math.h>
 #include <gccore.h>
+#include <malloc.h>
+#include <string.h>
 #include "Structs.h"
 #include "GxInit.h"
 
@@ -17,7 +16,6 @@ GXRModeObj	*screenMode;
 static void	*frameBuffer;
 static vu8	readyForCopy;
 ivec2 Stick;
-//struct ivec2 CStick;
 
 camera cam = {
 	{0.0F, 0.0F, 0.0F },
@@ -38,7 +36,6 @@ u8 colors[]	ATTRIBUTE_ALIGN(32)	= {
 };	
 
 void walkplayer(ivec2);
-//void movecamera(struct ivec2);
 
 // some GX stuff
 void update_screen(Mtx, guVector);
@@ -57,18 +54,10 @@ int	main()
 		Stick.y = PAD_StickY(0);
 		int deadzone = 1;
 
-		//CStick.x = PAD_SubStickX(0);
-		//CStick.y = PAD_SubStickY(0);
-
 		if ((Stick.y > deadzone || Stick.y < -deadzone) || (Stick.x > deadzone || Stick.x < -deadzone))
 		{
 			walkplayer(Stick);
 		}
-		/*
-		if ((CStick.y > 18 || CStick.y < -18) || (CStick.x > 18 || CStick.x < -18))
-		{
-			movecamera(CStick);
-		}*/
 
 		VIDEO_Flush();
 		update_screen(view, cam.pos);
@@ -109,9 +98,3 @@ void walkplayer(ivec2 speed)
 	cam.view.z += v.z * speed.y;
 	cam.pos.z += v.z * speed.y;
 }
-
-/*
-void movecamera(struct ivec2 speed) 
-{
-
-}*/
